@@ -14,15 +14,11 @@ public class IOCFactory
     {
         // 加载程序集并获取所有类型
         var assembly = Assembly.Load("IOCDemoByConstructor");
-        Type[] types = assembly.GetTypes();
+        var types = assembly.GetTypes().Where(t => t.GetCustomAttribute(typeof(IOCService)) != null).ToList();
 
         foreach (Type type in types)
         {
-            // 检查类型是否有 IOCService 特性
-            if (type.GetCustomAttribute(typeof(IOCService)) != null)
-            {
-                RegisterType(type);
-            }
+            RegisterType(type);
         }
     }
 
