@@ -14,14 +14,14 @@ public class ProductController : ControllerBase
     }
 
     [Route("get"), HttpGet]
-    public async Task<IActionResult> QueryProductAsync([FromQuery] QueryProductEvent request)
+    public async Task<IActionResult> QueryProductAsync([FromQuery] QueryProductEvent request, CancellationToken cancellationToken = default)
     {
         await _publishEndpoint.Publish<QueryProductEvent>(new QueryProductEvent
         {
             Id = Guid.NewGuid(),
             Name = request.Name,
             Timestamp = DateTime.Now
-        });
+        }, cancellationToken).ConfigureAwait(false);
 
         return Ok();
     }
