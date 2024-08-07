@@ -19,21 +19,21 @@ public class Startup
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         
-        services.AddMassTransit(x =>
-        {
-            x.AddConsumer<QueryProductConsumer>();
-        
-            x.UsingRabbitMq((context, cfg) =>
-            {
-                cfg.Host("localhost", "/", h => { });
-        
-                // 配置FileReceived的接收端点
-                cfg.ReceiveEndpoint("query_product_queue", e =>
-                {
-                    e.ConfigureConsumer<QueryProductConsumer>(context);
-                });
-            });
-        });
+        // services.AddMassTransit(x =>
+        // {
+        //     x.AddConsumer<QueryProductConsumer>();
+        //
+        //     x.UsingRabbitMq((context, cfg) =>
+        //     {
+        //         cfg.Host("localhost", "/", h => { });
+        //
+        //         // 配置FileReceived的接收端点
+        //         cfg.ReceiveEndpoint("query_product_queue", e =>
+        //         {
+        //             e.ConfigureConsumer<QueryProductConsumer>(context);
+        //         });
+        //     });
+        // });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
