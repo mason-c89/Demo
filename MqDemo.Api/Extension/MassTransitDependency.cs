@@ -2,6 +2,7 @@ using System.Reflection;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using MassTransit;
+using MqDemo.Api.Filter;
 
 namespace MqDemo.Api.Extension;
 
@@ -38,6 +39,7 @@ public static class MassTransitDependency
                 // 配置FileReceived的接收端点
                 cfg.ReceiveEndpoint("demo_queue", e =>
                 {
+                    e.UseConsumeFilter(typeof(ExceptionLoggerFilter<>), context);
                     foreach (var consumer in consumers)
                     {
                         e.ConfigureConsumer(context, consumer);
