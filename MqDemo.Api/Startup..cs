@@ -1,6 +1,5 @@
 using Autofac;
-using MassTransit;
-using MqDemo.Api.Masstransit;
+using Serilog;
 
 namespace MqDemo.Api;
 
@@ -54,5 +53,6 @@ public class Startup
     public void ConfigureContainer(ContainerBuilder builder)
     {
         builder.RegisterModule(new MqDemoModule(Configuration, typeof(MqDemoModule).Assembly));
+        builder.RegisterModule(new LogModule(Log.Logger));
     }
 }

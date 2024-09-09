@@ -40,6 +40,7 @@ public static class MassTransitDependency
                 cfg.ReceiveEndpoint("demo_queue", e =>
                 {
                     e.UseConsumeFilter(typeof(ExceptionLoggerFilter<>), context);
+                    e.UseMessageRetry(r => r.Immediate(5));
                     foreach (var consumer in consumers)
                     {
                         e.ConfigureConsumer(context, consumer);

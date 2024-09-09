@@ -1,0 +1,6 @@
+[submodule "SubmoduleDemo.Api/StaticIndexDemo"]
+	path = SubmoduleDemo.Api/StaticIndexDemo
+	url = https://github.com/mason-c89/StaticIndexDemo
+[submodule "SubmoduleDemo.Api/--force"]
+	path = SubmoduleDemo.Api/--force
+	url = https://github.com/mason-c89/StaticIndexDemo
